@@ -17,12 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(
-        name = "customers",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uk_customers_email", columnNames = "email"),
-                @UniqueConstraint(name = "uk_customers_mobile_number", columnNames = "mobile_number")
-        })
+@Table( name = "customers")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,12 +38,12 @@ public class customer extends BaseEntity {
 
     @NotBlank
     @Email
-    @Column(name = "email", nullable = false, length = 100)
+    @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
     @NotBlank
     @Pattern(regexp = "^01[0125][0-9]{8}$", message = "Invalid Egyptian mobile number")
-    @Column(name = "mobile_number", nullable = false, length = 11)
+    @Column(name = "mobile_number", nullable = false, unique = true, length = 11)
     private String mobileNumber;
 
     @Column(name = "password_hash", nullable = false)
